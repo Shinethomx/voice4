@@ -1,0 +1,42 @@
+{%extends 'base.html'%}
+
+{%block body_block%}
+
+<div class="container m-5 " style="margin-bottom: 10%;">
+
+    <div class="row ">
+        {%for p in posts%}
+        <div class="col-md-4"></div>
+        <div class="col-4">
+
+            <div class="card mb-3" style="width: 100%;">
+                {%if p.image%}
+
+                <a href="#!"><img class="card-img-top" src="{{p.image.url}}" alt="..." /></a>
+                {%endif%}
+                <div class="">
+                    <a href="{%url 'like' p.id%}" class="fs-4 me-2 ms-2">
+                        <i class="fa-regular fa-thumbs-up" style="color:black;"></i>
+                          
+                    </a>
+                    <a href="{%url 'postsdetail' p.id%}" class="fs-4 ">
+                        <i class="fa-regular fa-comment"  style="color:black;"></i>
+                    </a>
+                    <div class="mt-2 ms-2 fw-bold">
+                        {{p.like.all.count}} like
+                    </div>
+                    <h2 class="card-title h4 ms-2">{{p.caption}}</h2>
+                    <div class="small text-muted ms-2">{{p.created_date}}</div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-4"></div>
+
+
+        {%endfor%}
+    </div>
+</div>
+
+{%endblock%}

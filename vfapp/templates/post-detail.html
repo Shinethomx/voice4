@@ -1,0 +1,68 @@
+{%extends 'base.html'%}
+{%block body_block%}
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-4"></div>
+        <div class="col-4">
+            <div class="card mb-3" style="width: 100%;">
+                {%if posts.image%}
+
+                <a href="#!"><img class="card-img-top" src="{{posts.image.url}}" alt="..." /></a>
+                {%endif%}
+                <div>
+                    <a href="" class="fs-4 me-2 ms-2">
+                        <i class="fa-regular fa-thumbs-up" style="color:black;"></i>
+
+                    </a>
+                    <a href="" class="fs-4 ">
+                        <i class="fa-regular fa-comment" style="color:black;"></i>
+                    </a>
+
+                    <form action="{%url 'addcomment' posts.id %}" method="post" class="fs-4 me-2 ms-2">
+                        {%csrf_token%}
+                        <textarea name="comment" id="" cols="30" rows="2">
+
+                        </textarea>
+                        <div class="">
+                            <input type="submit" value="Comment" class="btn btn-primary">
+                        </div>
+
+                    </form>
+
+                    <h2 class="card-title  ms-2">{{posts.caption}}</h2>
+                    <div class="small text-muted ms-2">{{posts.created_date}}</div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+
+            <ul class="list-group">
+                {%for comnts in posts.comments_set.all%}
+
+                <li class="list-group-item">
+                    <span class="fw-bolder">{{comnts.user}}</span>
+                    {{comnts.comment}}
+                    <p class="fw-light">
+                        {{comnts.created_date}}
+                        
+                           @{{comnts.User}}
+                        
+                    </p>
+                    
+                </li>
+
+                {%endfor%}
+            </ul>
+
+        </div>
+
+    </div>
+</div>
+
+
+{%endblock%}

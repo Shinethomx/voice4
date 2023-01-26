@@ -1,0 +1,94 @@
+{%extends 'base.html'%}
+{%block body_block%}
+
+<style>
+    .card-img-overlay {
+        position: absolute;
+        top: 0;
+        right: unset;
+        left: unset;
+        bottom: unset;
+        background-color:unset;
+    }
+
+</style>
+
+
+
+<div class="container">
+
+    <div class="row" style="margin: 10%;">
+        <div class="col-lg-1 ">
+            {%if request.user.profile_pic%}
+            <img class="rounded-circle " style="margin-left:90%; " width="145%" src="{{request.user.profile_pic.url}}">
+
+            {%endif%}
+
+        </div>
+        <div class="col-lg-11">
+
+            <div class="container">
+                <div class="row ms-5">
+                    <div class="col-6 fs-3">{{request.user}}
+                        <i class="bi bi-patch-check-fill" style="color:blue;"></i>
+                        <a href="{%url 'editprofile'%}" class="btn btn-primary ms-3">Editprofile</a>
+                        <i class="bi bi-gear"></i>
+                    </div>
+
+                    <div class="col-6 ms-2">
+
+                    </div>
+
+                    <span class="text-muted mt-2">
+                        {{user.first_name}}
+                        {{user.last_name}}
+                    </span>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+</div>
+<div class="container">
+
+    <div class="row" style=" margin: 11%;">
+        <hr>
+
+        {%for img in images%}
+        <div class=" card mb-2 col-lg-4 m-5" style="height: 330px; width: 330px;">
+
+
+
+            {%if img.image%}
+
+
+            <a href="">
+                <img src="{{img.image.url}}" alt="" class="rounded"
+                    style="max-height: 330px; min-height: 330px; max-width: 330px; min-width: 330px; ">
+            </a>
+
+
+            {%endif%}
+
+            <div class="card-img-overlay ">
+                <a href="{%url 'remove-post' img.id%}">
+                    <h5><i class="bi bi-trash3-fill"></i></h5>
+                </a>
+                          
+            </div>
+
+        </div>
+
+        {%endfor%}
+    </div>
+
+</div>
+
+{%endblock%}
